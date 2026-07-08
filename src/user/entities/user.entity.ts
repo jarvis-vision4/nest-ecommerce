@@ -5,23 +5,23 @@ import { Entity, Column, PrimaryGeneratedColumn, OneToMany, ManyToOne } from 'ty
 @Entity()
 export class User {
   @PrimaryGeneratedColumn()
-  id: number;
+  id!: number;
 
   @Column()
-  firstName: string;
+  firstName!: string;
 
   @Column()
-  lastName: string;
+  lastName!: string;
   @Column()
-  email: string;
+  email!: string;
   
   @Column()
-  password: string;
+  password!: string;
 
   @Column({ default: true })
-  isActive: boolean;
+  isActive!: boolean;
 
   @ManyToOne(()=>Role,(role)=>role.users)
-  role:Role
+  role!:Role
 
 }

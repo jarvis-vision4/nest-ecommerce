@@ -5,17 +5,17 @@ import { Column, Entity, OneToMany, PrimaryColumn } from "typeorm";
 @Entity()
 export class Role {
     @PrimaryColumn()
-    name:string;
+    name!:string;
 
     @Column()
-    description:string;
+    description!:string;
     
     @Column({default:true})
-    isActive:boolean;
+    isActive!:boolean;
     
     @OneToMany(()=>User,(user)=>user.role)
-    users:User[]
+    users!:User[]
     @OneToMany(()=>Permission,(permission)=>permission.role)
-    permissions:Permission[]
+    permissions!:Permission[]
 
 }

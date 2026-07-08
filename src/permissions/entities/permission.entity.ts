@@ -5,16 +5,16 @@ import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn, PrimaryGeneratedC
 @Entity()
 export class Permission {
     @PrimaryColumn()
-    roleName:string;
+    roleName!:string;
     @PrimaryColumn()
-    endpointId:string;
+    endpointId!:string;
     @ManyToOne(()=>Role,(role)=>role.permissions)
     @JoinColumn({name:"roleName"})
-    role:Role;
+    role!:Role;
     @ManyToOne(()=>Endpoint,(endpoint)=>endpoint.permissions)
     @JoinColumn({name:"endpointId"})
-    endpoint:Endpoint;
+    endpoint!:Endpoint;
 
     @Column({default:false})
-    isAllow:boolean;
+    isAllow!:boolean;
 }
