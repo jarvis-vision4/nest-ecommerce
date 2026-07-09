@@ -1,23 +1,32 @@
 import slugify from "slugify";
-import { AfterUpdate, BeforeInsert, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Product } from "src/product/entities/product.entity";
+import { AfterUpdate, BeforeInsert, Column, DeleteDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Category {
     @PrimaryGeneratedColumn()
-    id: number;
+    id!: number;
 
     @Column()
-    name: string;
+    name!: string;
 
     @Column()
-    description: string;
+    description!: string;
 
     @Column()
-    slug:string;
+    slug!:string;
     
     @Column({default:true})
-    isActive:boolean;
+    isActive!:boolean;
 
+    @DeleteDateColumn()
+    deletedDate!:Date;
+    @ManyToOne(() => Category, (c) => c.children)
+    parent!:Category;
+    @OneToMany (() => Category, (c) => c. parent)
+    children!:Category[];
+    @OneToMany(()=>Product,(p)=>p.category)
+    products!:Product[];
     @BeforeInsert()
     @AfterUpdate()
     generateSlug(){

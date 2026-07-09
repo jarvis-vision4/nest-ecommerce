@@ -15,5 +15,6 @@ import { ConfigModule } from '@nestjs/config';
   ],
   controllers: [CategoryController],
   providers: [CategoryService],
+  exports:[CategoryService]
 })
 export class CategoryModule {}

@@ -15,10 +15,14 @@ import { Endpoint } from './endpoint/entities/endpoint.entity';
 import { ProductModule } from './product/product.module';
 import { PermissionsModule } from './permissions/permissions.module';
 import { Permission } from './permissions/entities/permission.entity';
+import { Product } from './product/entities/product.entity';
+import { UploadModule } from './upload/upload.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({
+      isGlobal:true
+    }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: (configService:ConfigService) => ({
@@ -38,7 +42,8 @@ import { Permission } from './permissions/entities/permission.entity';
           Category,
           Role,
           Endpoint,
-          Permission
+          Permission,
+          Product
         ],
         synchronize: true,
       }),
@@ -53,7 +58,9 @@ import { Permission } from './permissions/entities/permission.entity';
 
     ProductModule,
 
-    PermissionsModule
+    PermissionsModule,
+
+    UploadModule
   ],
   controllers: [AppController],
   providers: [AppService],

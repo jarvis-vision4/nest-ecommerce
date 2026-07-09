@@ -6,6 +6,7 @@ import { Injectable, NestInterceptor, ExecutionContext, CallHandler } from '@nes
 import { ClassConstructor, plainToInstance } from 'class-transformer';
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
+import { UseInterceptors } from '@nestjs/common';
 
 @Injectable()
 export class TransformDtoInterceptor<T> implements NestInterceptor {
@@ -25,4 +26,7 @@ export class TransformDtoInterceptor<T> implements NestInterceptor {
         
       );
   }
+}
+export function TransformDto<T>(dto: ClassConstructor<T>) {
+  return UseInterceptors(new TransformDtoInterceptor(dto));
 }

@@ -2,9 +2,9 @@ import { Expose } from "class-transformer";
 
 export class ResponseCategoryDto {
     @Expose()
-    name:string;
+    name!:string;
     @Expose()
-    description:string;
+    description!:string;
     @Expose()
-    slug:string;
+    slug!:string;
 }

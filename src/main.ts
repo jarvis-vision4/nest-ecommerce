@@ -28,7 +28,7 @@ async function bootstrap() {
       }).execute();
     }
     const roles=await queryRunner.manager.getRepository(Role).createQueryBuilder("role").where("role.isActive=:isActive",{isActive:true}).getMany();
-    console.log(roles);
+    console.log('JWT_SECRET_KEY:', process.env.JWT_SECRET);
     await queryRunner.commitTransaction();
   } catch (error) {
     await queryRunner.rollbackTransaction();
