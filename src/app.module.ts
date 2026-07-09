@@ -18,33 +18,38 @@ import { Permission } from './permissions/entities/permission.entity';
 import { Product } from './product/entities/product.entity';
 import { UploadModule } from './upload/upload.module';
 import { ProductGalleriesModule } from './product-galleries/product-galleries.module';
+import { VariantsModule } from './variants/variants.module';
+import { ProductGallery } from './product-galleries/entities/product-gallery.entity';
+import { Variant } from './variants/entities/variant.entity';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
-      isGlobal:true
+      isGlobal: true
     }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
-      useFactory: (configService:ConfigService) => ({
+      useFactory: (configService: ConfigService) => ({
         type: 'postgres',
         // host: configService.get("DB_HOST"),
         // port: +configService.get("DB_PORT"),
         // username: configService.get("DB_USERNAME"),
         // password: configService.get("DB_PASSWORD"),
         // database: configService.get("DB_NAME"),
-        host:'localhost',
-        port:5432, 
-        username:'postgres',
-        password:"090908",
-        database:"ecommerce_nest",
+        host: 'localhost',
+        port: 5432,
+        username: 'postgres',
+        password: "090908",
+        database: "ecommerce_nest",
         entities: [
           User,
           Category,
           Role,
           Endpoint,
           Permission,
-          Product
+          Product,
+          ProductGallery,
+          Variant
         ],
         synchronize: true,
       }),
@@ -63,9 +68,11 @@ import { ProductGalleriesModule } from './product-galleries/product-galleries.mo
 
     UploadModule,
 
-    ProductGalleriesModule
+    ProductGalleriesModule,
+
+    VariantsModule
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }

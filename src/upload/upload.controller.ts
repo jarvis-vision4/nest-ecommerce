@@ -8,7 +8,7 @@ import { diskStorage } from 'multer';
 import * as path from "node:path"
 @Controller('api/v1/upload')
 export class UploadController {
-  constructor(private readonly uploadService: UploadService) {}
+  constructor(private readonly uploadService: UploadService) { }
 
   // @Post()
   // create(@Body() createUploadDto: CreateUploadDto) {
@@ -16,28 +16,28 @@ export class UploadController {
   // }
 
   @Post()
-  @UseInterceptors(FileInterceptor('productImage',{
-    storage:diskStorage({
-      destination:function (req,file,cb) {
-        cb(null,path.join(process.cwd(),"uploads","products"))
+  @UseInterceptors(FileInterceptor('productImage', {
+    storage: diskStorage({
+      destination: function (req, file, cb) {
+        cb(null, path.join(process.cwd(), "uploads", "products"))
       },
       filename: function (req, file, cb) {
-        const uniqueSuffix = Date.now() ;
+        const uniqueSuffix = Date.now();
         cb(null, `${uniqueSuffix}-${file.originalname}`);
-        }
+      }
     })
   }))
   uploadFile(@UploadedFile(
-  new ParseFilePipe({
-    validators: [
-      new MaxFileSizeValidator({ maxSize: 1000000 }),
-      
-    ],
-  }),)
-file: Express.Multer.File,) {
+    new ParseFilePipe({
+      validators: [
+        new MaxFileSizeValidator({ maxSize: 1000000 }),
+
+      ],
+    }),)
+  file: Express.Multer.File,) {
     console.log(file.mimetype);
     return {
-      "message":"Upload Success"
+      "message": "Upload Success"
     }
   }
 
