@@ -1,6 +1,7 @@
 import slugify from "slugify";
 import { Category } from "src/category/entities/category.entity";
-import { AfterUpdate, BeforeInsert, Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { ProductGallery } from "src/product-galleries/entities/product-gallery.entity";
+import { AfterUpdate, BeforeInsert, Column, DeleteDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Product {
@@ -9,6 +10,8 @@ export class Product {
     @Column({type:'varchar',length:100})
     name!:string;
     @Column({type:'numeric',precision:6,scale:2})
+    @Column({type:'varchar',length:100,nullable:true})
+    image!:string;
     price!:number;
     @Column({type:'numeric',precision:6,scale:2, nullable:true})
     offerPrice!:number;
@@ -20,6 +23,10 @@ export class Product {
     category!:Category;
     @Column({type:'int'})
     quantity!:number;
+    @DeleteDateColumn()
+    deletedDate!:Date;
+    @OneToMany(()=>ProductGallery,(g)=>g.product)
+    productGalleries!:ProductGallery[]
     @Column({type:'text'})
     slug!:string;
     @BeforeInsert()

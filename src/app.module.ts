@@ -17,6 +17,7 @@ import { PermissionsModule } from './permissions/permissions.module';
 import { Permission } from './permissions/entities/permission.entity';
 import { Product } from './product/entities/product.entity';
 import { UploadModule } from './upload/upload.module';
+import { ProductGalleriesModule } from './product-galleries/product-galleries.module';
 
 @Module({
   imports: [
@@ -60,7 +61,9 @@ import { UploadModule } from './upload/upload.module';
 
     PermissionsModule,
 
-    UploadModule
+    UploadModule,
+
+    ProductGalleriesModule
   ],
   controllers: [AppController],
   providers: [AppService],
