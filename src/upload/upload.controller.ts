@@ -6,7 +6,11 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { Express } from 'express';
 import { diskStorage } from 'multer';
 import * as path from "node:path"
+import { TransformDto } from 'src/cores/interceptors/transform-dto.interceptor';
+import { ResponseUploadDto } from './dto/response-upload.dto';
+
 @Controller('api/v1/upload')
+@TransformDto(ResponseUploadDto)
 export class UploadController {
   constructor(private readonly uploadService: UploadService) { }
 
