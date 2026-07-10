@@ -50,8 +50,12 @@ export class VariantItemsService {
     }
     return variantItem;
   }
-  update(id: number, updateVariantItemDto: UpdateVariantItemDto) {
-    return `This action updates a #${id} variantItem`;
+  async update(id: number, updateVariantItemDto: UpdateVariantItemDto) {
+    const variantItem = await this.findVariantItemById(id)
+    //Object.assign(variantItem, updateVariantItemDto)
+    const fieldUpdate = await this.variantRepository.update(variantItem.id, updateVariantItemDto)
+    const updatedItem = Object.assign(variantItem, fieldUpdate)
+    return updatedItem;
   }
 
   async remove(id: number) {

@@ -37,7 +37,7 @@ export class VariantsService {
   }
 
 
-  async findProductIdWithVariants(id: number) {
+  async findVariantsWithProductId(id: number) {
     const product = await this.productService.findOne(id)
     const variants = await this.variantRepository.find({
       where: {
@@ -50,7 +50,7 @@ export class VariantsService {
     return variants;
   }
 
-  update(id: number, updateVariantDto: UpdateVariantDto) {
+  async update(id: number, updateVariantDto: UpdateVariantDto) {
     return `This action updates a #${id} variant`;
   }
 

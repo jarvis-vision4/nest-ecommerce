@@ -21,8 +21,8 @@ export class VariantsController {
   }
 
   @Get(':productId/product')
-  findOne(@Param('productId', ParseIntPipe) id: number) {
-    return this.variantsService.findProductIdWithVariants(id);
+  findVariants(@Param('productId', ParseIntPipe) id: number) {
+    return this.variantsService.findVariantsWithProductId(id);
   }
 
   @Patch(':id')

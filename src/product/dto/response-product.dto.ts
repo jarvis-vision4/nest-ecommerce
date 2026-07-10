@@ -1,5 +1,7 @@
-import { Expose, Transform } from "class-transformer";
+import { Expose, Transform, Type } from "class-transformer";
 import { Product } from "../entities/product.entity";
+import { Variant } from "src/variants/entities/variant.entity";
+import { ResponseVariantDto } from "src/variants/dto/response-variant.dto";
 
 export class ResponseProductDto {
     @Expose()
@@ -23,4 +25,7 @@ export class ResponseProductDto {
     slug!: string;
     @Expose()
     quantity!: number;
+    @Expose()
+    @Type(() => ResponseVariantDto)
+    variants!: ResponseVariantDto[]
 }

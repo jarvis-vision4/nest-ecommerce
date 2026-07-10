@@ -7,4 +7,6 @@ export class ResponseVariantItemDto {
     value!: string;
     @Expose()
     variantId!: number;
+    @Expose()
+    price!: number;
 }

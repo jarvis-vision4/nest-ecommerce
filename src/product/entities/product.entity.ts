@@ -1,4 +1,5 @@
 import slugify from "slugify";
+import { CartItem } from "src/cart/entities/cart-item.entity";
 import { Category } from "src/category/entities/category.entity";
 import { ProductGallery } from "src/product-galleries/entities/product-gallery.entity";
 import { Variant } from "src/variants/entities/variant.entity";
@@ -10,10 +11,10 @@ export class Product {
     id!: number;
     @Column({ type: 'varchar', length: 100 })
     name!: string;
-    @Column({ type: 'numeric', precision: 6, scale: 2 })
+    @Column({ type: 'numeric', precision: 6, scale: 2, default: 0 })
+    price!: number;
     @Column({ type: 'varchar', length: 100, nullable: true })
     image!: string;
-    price!: number;
     @Column({ type: 'numeric', precision: 6, scale: 2, nullable: true })
     offerPrice!: number;
     @Column({ type: 'varchar', length: 255 })

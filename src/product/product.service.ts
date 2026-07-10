@@ -55,9 +55,13 @@ export class ProductService {
         slug
       },
       relations: {
-        category: true
+        category: true,
+        variants: {
+          items: true
+        }
       }
     })
+    console.log(product)
     if (!product) {
       throw new NotFoundException("Product with Id not found")
     }

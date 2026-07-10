@@ -10,7 +10,10 @@ export class VariantItem {
     @Column({ type: 'varchar', length: 20 })
     value!: string;
 
-    @ManyToOne(() => Variant, (v) => v.variants, { onDelete: 'CASCADE' })
+    @Column({ type: 'decimal', precision: 4, scale: 2, default: 0 })
+    price!: number;
+
+    @ManyToOne(() => Variant, (v) => v.items, { onDelete: 'CASCADE' })
     variant!: Variant;
 
     @DeleteDateColumn()

@@ -12,6 +12,6 @@ export class Variant {
     product!: Product;
 
     @OneToMany(() => VariantItem, (v) => v.variant)
-    variants!: VariantItem[]
+    items!: VariantItem[]
 
 }

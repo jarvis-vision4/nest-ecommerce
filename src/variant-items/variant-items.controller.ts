@@ -31,8 +31,8 @@ export class VariantItemsController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateVariantItemDto: UpdateVariantItemDto) {
-    return this.variantItemsService.update(+id, updateVariantItemDto);
+  update(@Param('id', ParseIntPipe) id: number, @Body() updateVariantItemDto: UpdateVariantItemDto) {
+    return this.variantItemsService.update(id, updateVariantItemDto);
   }
 
   @Delete(':id')
