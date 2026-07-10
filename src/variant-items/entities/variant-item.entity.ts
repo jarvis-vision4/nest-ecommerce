@@ -1,5 +1,5 @@
 import { Variant } from "src/variants/entities/variant.entity";
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, DeleteDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class VariantItem {
@@ -10,7 +10,10 @@ export class VariantItem {
     @Column({ type: 'varchar', length: 20 })
     value!: string;
 
-    @ManyToOne(() => Variant, (v) => v.variants)
-    variant!: Variant
+    @ManyToOne(() => Variant, (v) => v.variants, { onDelete: 'CASCADE' })
+    variant!: Variant;
+
+    @DeleteDateColumn()
+    deletedDate!: Date;
 
 }

@@ -33,7 +33,7 @@ export class VariantsService {
     const variant = new Variant()
     variant.product = product
     Object.assign(variant, { ...createVariantDto, name: createVariantDto.name.toLowerCase() })
-    this.variantRepository.save(variant)
+    return this.variantRepository.save(variant)
   }
 
 

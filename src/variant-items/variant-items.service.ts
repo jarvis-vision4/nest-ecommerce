@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { CreateVariantItemDto } from './dto/create-variant-item.dto';
 import { UpdateVariantItemDto } from './dto/update-variant-item.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -15,23 +15,57 @@ export class VariantItemsService {
   ) {
 
   }
-  create(createVariantItemDto: CreateVariantItemDto) {
-    return 'This action adds a new variantItem';
+  async create(createVariantItemDto: CreateVariantItemDto) {
+    const variant = await this.variantService.findVariant(createVariantItemDto.variantId)
+    const variantItem = new VariantItem()
+    variantItem.variant = variant
+    Object.assign(variantItem, createVariantItemDto)
+    return this.variantRepository.save(variantItem)
   }
 
   findAll() {
     return `This action returns all variantItems`;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} variantItem`;
+  async findVariantItemsByVariantId(id: number) {
+    const variant = await this.variantService.findVariant(id)
+    const variantItems = await this.variantRepository.find({
+      where: {
+        variant
+      }
+    })
+    if (variantItems.length == 0) {
+      throw new NotFoundException("Variant Items Not Found")
+    }
+    return variantItems;
   }
-
+  async findVariantItemById(id: number) {
+    const variantItem = await this.variantRepository.findOne({
+      where: {
+        id
+      }
+    })
+    if (!variantItem) {
+      throw new BadRequestException("Variant Item not found")
+    }
+    return variantItem;
+  }
   update(id: number, updateVariantItemDto: UpdateVariantItemDto) {
     return `This action updates a #${id} variantItem`;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} variantItem`;
+  async remove(id: number) {
+    const variantItem = await this.findVariantItemById(id)
+    return this.variantRepository.softRemove(variantItem)
+  }
+  async restore() {
+    const variantItems = await this.variantRepository.find({
+      withDeleted: true
+    })
+    if (!variantItems) {
+      throw new NotFoundException('Variant Items not found');
+    }
+    await this.variantRepository.recover(variantItems)
+
   }
 }
