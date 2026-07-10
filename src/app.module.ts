@@ -22,6 +22,9 @@ import { VariantsModule } from './variants/variants.module';
 import { ProductGallery } from './product-galleries/entities/product-gallery.entity';
 import { Variant } from './variants/entities/variant.entity';
 
+import { VariantItemsModule } from './variant-items/variant-items.module';
+import { VariantItem } from './variant-items/entities/variant-item.entity';
+
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -49,7 +52,8 @@ import { Variant } from './variants/entities/variant.entity';
           Permission,
           Product,
           ProductGallery,
-          Variant
+          Variant,
+          VariantItem
         ],
         synchronize: true,
       }),
@@ -70,7 +74,10 @@ import { Variant } from './variants/entities/variant.entity';
 
     ProductGalleriesModule,
 
-    VariantsModule
+    VariantsModule,
+
+
+    VariantItemsModule
   ],
   controllers: [AppController],
   providers: [AppService],

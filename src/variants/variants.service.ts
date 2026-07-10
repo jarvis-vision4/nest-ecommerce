@@ -54,7 +54,8 @@ export class VariantsService {
     return `This action updates a #${id} variant`;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} variant`;
+  async remove(id: number) {
+    const variant = await this.findVariant(id)
+    this.variantRepository.remove(variant)
   }
 }

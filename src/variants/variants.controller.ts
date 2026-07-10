@@ -31,7 +31,7 @@ export class VariantsController {
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.variantsService.remove(+id);
+  remove(@Param('id', ParseIntPipe) id: number) {
+    return this.variantsService.remove(id);
   }
 }
