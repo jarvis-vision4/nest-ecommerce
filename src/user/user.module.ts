@@ -6,8 +6,8 @@ import { User } from './entities/user.entity';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule } from '@nestjs/config';
 import { RoleModule } from 'src/role/role.module';
-import { RoleService } from 'src/role/role.service';
-import { AuthModule } from 'src/auth/auth.module';
+
+import { CartModule } from 'src/cart/cart.module';
 
 @Module({
   imports: [
@@ -15,11 +15,12 @@ import { AuthModule } from 'src/auth/auth.module';
     JwtModule,
     ConfigModule,
     RoleModule,
+    CartModule
   ],
   controllers: [UserController],
   providers: [UserService],
-  exports:[
-    UserModule
+  exports: [
+    UserService
   ]
 })
-export class UserModule {}
+export class UserModule { }

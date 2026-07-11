@@ -57,7 +57,9 @@ export class ProductService {
       relations: {
         category: true,
         variants: {
-          items: true
+          items: {
+
+          }
         }
       }
     })

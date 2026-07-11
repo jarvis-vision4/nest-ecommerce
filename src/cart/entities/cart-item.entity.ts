@@ -6,12 +6,12 @@ import { Cart } from "./cart.entity";
 export class CartItem {
     @PrimaryGeneratedColumn()
     id!: number;
-    @Column({ type: 'decimal', precision: 4, scale: 2 })
+    @Column({ type: 'decimal', precision: 4, scale: 2, default: 0 })
     price!: number;
     @Column({ type: 'int' })
     quantity!: number;
     @ManyToOne(() => Product)
-    products!: Product[];
+    product!: Product;
     @Column({ type: 'text' })
     variant!: string;
     @ManyToOne(() => Cart, (c) => c.cartItems)

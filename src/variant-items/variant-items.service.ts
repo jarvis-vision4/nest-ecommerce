@@ -32,7 +32,8 @@ export class VariantItemsService {
     const variantItems = await this.variantRepository.find({
       where: {
         variant
-      }
+      },
+
     })
     if (variantItems.length == 0) {
       throw new NotFoundException("Variant Items Not Found")
@@ -43,19 +44,23 @@ export class VariantItemsService {
     const variantItem = await this.variantRepository.findOne({
       where: {
         id
+      },
+      relations: {
+        variant: true
       }
     })
+    console.log(variantItem)
     if (!variantItem) {
       throw new BadRequestException("Variant Item not found")
     }
     return variantItem;
   }
   async update(id: number, updateVariantItemDto: UpdateVariantItemDto) {
-    const variantItem = await this.findVariantItemById(id)
-    //Object.assign(variantItem, updateVariantItemDto)
-    const fieldUpdate = await this.variantRepository.update(variantItem.id, updateVariantItemDto)
-    const updatedItem = Object.assign(variantItem, fieldUpdate)
-    return updatedItem;
+    const variantItem = await this.findVariantItemById(id);
+
+    Object.assign(variantItem, updateVariantItemDto);
+
+    return this.variantRepository.save(variantItem);
   }
 
   async remove(id: number) {

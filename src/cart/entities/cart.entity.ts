@@ -7,12 +7,14 @@ export class Cart {
     @PrimaryGeneratedColumn()
     id!: number;
 
+    @OneToOne(() => User, { onDelete: "CASCADE" })
+    @JoinColumn()
+    user!: User;
+
     @Column({ default: 0 })
     totalPrice!: number;
 
-    @OneToOne(() => User)
-    @JoinColumn()
-    user!: User;
+
 
     @OneToMany(() => CartItem, (c) => c.cart)
     cartItems!: CartItem[]

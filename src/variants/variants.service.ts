@@ -42,6 +42,9 @@ export class VariantsService {
     const variants = await this.variantRepository.find({
       where: {
         product
+      },
+      relations: {
+        items: true
       }
     })
     if (variants.length == 0) {

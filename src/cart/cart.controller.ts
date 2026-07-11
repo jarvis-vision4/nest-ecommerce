@@ -1,16 +1,16 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
 import { CartService } from './cart.service';
-import { CreateCartDto } from './dto/create-cart.dto';
-import { UpdateCartDto } from './dto/update-cart.dto';
+import { AddToCartDTO } from './dto/add-to-cart.dto';
+import { CurrentUser } from 'src/cores/decorators/current-user.decorator';
+import { UserPayload } from 'src';
+import { AuthGuard } from 'src/cores/guards/auth.guard';
+
+
 
 @Controller('api/v1/cart')
 export class CartController {
   constructor(private readonly cartService: CartService) { }
 
-  @Post()
-  create(@Body() createCartDto: CreateCartDto) {
-    return this.cartService.create(createCartDto);
-  }
 
   @Get()
   findAll() {
@@ -22,9 +22,14 @@ export class CartController {
     return this.cartService.findOne(+id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCartDto: UpdateCartDto) {
-    return this.cartService.update(+id, updateCartDto);
+  // @Patch(':id')
+  // update(@Param('id') id: string, @Body() updateCartDto: UpdateCartDto) {
+  //   return this.cartService.update(+id, updateCartDto);
+  // }
+  @Post('add-to-cart')
+  @UseGuards(AuthGuard)
+  addItemToCart(@Body() addtoCartDto: AddToCartDTO, @CurrentUser() user: UserPayload) {
+    return this.cartService.addItemToCart(addtoCartDto, user)
   }
 
   @Delete(':id')

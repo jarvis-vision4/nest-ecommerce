@@ -1,4 +1,5 @@
-import { Expose } from "class-transformer";
+import { Expose, Transform } from "class-transformer";
+import { Variant } from "src/variants/entities/variant.entity";
 
 export class ResponseVariantItemDto {
     @Expose()
@@ -9,4 +10,7 @@ export class ResponseVariantItemDto {
     variantId!: number;
     @Expose()
     price!: number;
+    @Expose()
+    @Transform(({ obj }) => obj.variant?.name)
+    item!: string;
 }

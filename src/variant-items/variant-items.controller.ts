@@ -19,6 +19,10 @@ export class VariantItemsController {
   findAll() {
     return this.variantItemsService.findAll();
   }
+  @Get(':id')
+  findVariantItemById(@Param('id', ParseIntPipe) id: number) {
+    return this.variantItemsService.findVariantItemById(id)
+  }
 
   @Post("restore")
   restoreAll() {

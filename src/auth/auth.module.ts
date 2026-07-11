@@ -16,17 +16,17 @@ import { RoleModule } from 'src/role/role.module';
     TypeOrmModule.forFeature([User]),
     JwtModule.registerAsync({
       imports: [ConfigModule],
-      useFactory:  (configService:ConfigService) => ({
-        secretOrPrivateKey:configService.get("JWT_SECRET_KEY"),
+      useFactory: (configService: ConfigService) => ({
+        secretOrPrivateKey: configService.get("JWT_SECRET_KEY"),
         signOptions: {
           expiresIn: configService.get("JWT_EXPIRATION_TIME"),
         },
       }),
-      inject:[ConfigService]
+      inject: [ConfigService]
     }),
   ],
   controllers: [AuthController],
-  providers: [AuthService,UserService],
-  
+  providers: [AuthService],
+
 })
-export class AuthModule {}
+export class AuthModule { }
