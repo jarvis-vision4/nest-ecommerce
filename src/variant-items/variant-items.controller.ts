@@ -1,4 +1,13 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  ParseIntPipe,
+} from '@nestjs/common';
 import { VariantItemsService } from './variant-items.service';
 import { CreateVariantItemDto } from './dto/create-variant-item.dto';
 import { UpdateVariantItemDto } from './dto/update-variant-item.dto';
@@ -8,7 +17,7 @@ import { ResponseVariantItemDto } from './dto/response-variant-item.dto';
 @Controller('api/v1/variant-items')
 @TransformDto(ResponseVariantItemDto)
 export class VariantItemsController {
-  constructor(private readonly variantItemsService: VariantItemsService) { }
+  constructor(private readonly variantItemsService: VariantItemsService) {}
 
   @Post()
   create(@Body() createVariantItemDto: CreateVariantItemDto) {
@@ -21,12 +30,12 @@ export class VariantItemsController {
   }
   @Get(':id')
   findVariantItemById(@Param('id', ParseIntPipe) id: number) {
-    return this.variantItemsService.findVariantItemById(id)
+    return this.variantItemsService.findVariantItemById(id);
   }
 
-  @Post("restore")
+  @Post('restore')
   restoreAll() {
-    return this.variantItemsService.restore()
+    return this.variantItemsService.restore();
   }
 
   @Get(':variantId/variant')
@@ -35,7 +44,10 @@ export class VariantItemsController {
   }
 
   @Patch(':id')
-  update(@Param('id', ParseIntPipe) id: number, @Body() updateVariantItemDto: UpdateVariantItemDto) {
+  update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() updateVariantItemDto: UpdateVariantItemDto,
+  ) {
     return this.variantItemsService.update(id, updateVariantItemDto);
   }
 

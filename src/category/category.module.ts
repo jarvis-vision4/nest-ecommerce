@@ -8,13 +8,9 @@ import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule } from '@nestjs/config';
 
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([Category]),
-    JwtModule,
-    ConfigModule
-  ],
+  imports: [TypeOrmModule.forFeature([Category]), JwtModule, ConfigModule],
   controllers: [CategoryController],
   providers: [CategoryService],
-  exports:[CategoryService]
+  exports: [CategoryService],
 })
 export class CategoryModule {}

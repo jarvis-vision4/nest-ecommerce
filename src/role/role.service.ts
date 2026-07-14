@@ -9,40 +9,40 @@ import { Repository } from 'typeorm';
 export class RoleService {
   constructor(
     @InjectRepository(Role)
-    private roleRepository:Repository<Role>
-  ){}
+    private roleRepository: Repository<Role>,
+  ) {}
   create(createRoleDto: CreateRoleDto) {
-    const role = new Role()
-    Object.assign(role,createRoleDto)
-    return this.roleRepository.save(role)
+    const role = new Role();
+    Object.assign(role, createRoleDto);
+    return this.roleRepository.save(role);
   }
 
   async findAll() {
-    const roles=await this.roleRepository.find();
-    return roles
+    const roles = await this.roleRepository.find();
+    return roles;
   }
 
-  async getRole(name:string) {
-    const role=await this.roleRepository.findOne({
-      where:{
-        name
-      }
-    })
+  async getRole(name: string) {
+    const role = await this.roleRepository.findOne({
+      where: {
+        name,
+      },
+    });
     if (!role) {
-      throw new NotFoundException(`Role ${name} not found`)
+      throw new NotFoundException(`Role ${name} not found`);
     }
-    return role
+    return role;
   }
 
-  async update(name:string, updateRoleDto: UpdateRoleDto) {
-    const role=await this.getRole(name)
-    role.description=updateRoleDto.description!;
-    return this.roleRepository.save(role)
+  async update(name: string, updateRoleDto: UpdateRoleDto) {
+    const role = await this.getRole(name);
+    role.description = updateRoleDto.description!;
+    return this.roleRepository.save(role);
   }
 
-  async remove(name:string) {
-    const role=await this.getRole(name);
-    role.isActive=false;
-    return this.roleRepository.save(role)
+  async remove(name: string) {
+    const role = await this.getRole(name);
+    role.isActive = false;
+    return this.roleRepository.save(role);
   }
 }

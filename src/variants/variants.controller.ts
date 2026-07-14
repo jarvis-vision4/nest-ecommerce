@@ -1,4 +1,13 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  ParseIntPipe,
+} from '@nestjs/common';
 import { VariantsService } from './variants.service';
 import { CreateVariantDto } from './dto/create-variant.dto';
 import { UpdateVariantDto } from './dto/update-variant.dto';
@@ -8,7 +17,7 @@ import { ResponseVariantDto } from './dto/response-variant.dto';
 @Controller('api/v1/variants')
 @TransformDto(ResponseVariantDto)
 export class VariantsController {
-  constructor(private readonly variantsService: VariantsService) { }
+  constructor(private readonly variantsService: VariantsService) {}
 
   @Post()
   create(@Body() createVariantDto: CreateVariantDto) {

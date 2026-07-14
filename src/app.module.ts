@@ -31,7 +31,7 @@ import { CartItem } from './cart/entities/cart-item.entity';
 @Module({
   imports: [
     ConfigModule.forRoot({
-      isGlobal: true
+      isGlobal: true,
     }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
@@ -45,8 +45,8 @@ import { CartItem } from './cart/entities/cart-item.entity';
         host: 'localhost',
         port: 5432,
         username: 'postgres',
-        password: "090908",
-        database: "ecommerce_nest",
+        password: '090908',
+        database: 'ecommerce_nest',
         entities: [
           User,
           Category,
@@ -58,11 +58,11 @@ import { CartItem } from './cart/entities/cart-item.entity';
           Variant,
           VariantItem,
           Cart,
-          CartItem
+          CartItem,
         ],
         synchronize: true,
       }),
-      inject: [ConfigService]
+      inject: [ConfigService],
     }),
     UserModule,
     CategoryModule,
@@ -81,13 +81,11 @@ import { CartItem } from './cart/entities/cart-item.entity';
 
     VariantsModule,
 
-
     VariantItemsModule,
 
-
-    CartModule
+    CartModule,
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule { }
+export class AppModule {}

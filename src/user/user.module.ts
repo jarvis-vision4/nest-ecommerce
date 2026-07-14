@@ -15,12 +15,10 @@ import { CartModule } from 'src/cart/cart.module';
     JwtModule,
     ConfigModule,
     RoleModule,
-    CartModule
+    CartModule,
   ],
   controllers: [UserController],
   providers: [UserService],
-  exports: [
-    UserService
-  ]
+  exports: [UserService],
 })
-export class UserModule { }
+export class UserModule {}

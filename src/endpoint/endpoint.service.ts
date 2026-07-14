@@ -9,12 +9,12 @@ import { Repository } from 'typeorm';
 export class EndpointService {
   constructor(
     @InjectRepository(Endpoint)
-    private endpointRepository:Repository<Endpoint>
-  ){}
+    private endpointRepository: Repository<Endpoint>,
+  ) {}
   create(createEndpointDto: CreateEndpointDto) {
-    const endpoint=new Endpoint()
-    Object.assign(endpoint,createEndpointDto)
-    return this.endpointRepository.save(endpoint)
+    const endpoint = new Endpoint();
+    Object.assign(endpoint, createEndpointDto);
+    return this.endpointRepository.save(endpoint);
   }
 
   findAll() {

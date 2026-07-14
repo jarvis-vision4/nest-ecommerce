@@ -9,12 +9,12 @@ import { Repository } from 'typeorm';
 export class CategoryService {
   constructor(
     @InjectRepository(Category)
-    private categoryRepository:Repository<Category>
-  ){}
+    private categoryRepository: Repository<Category>,
+  ) {}
   create(createCategoryDto: CreateCategoryDto) {
-    const category=new Category()
-    Object.assign(category,createCategoryDto)
-    return this.categoryRepository.save(category)
+    const category = new Category();
+    Object.assign(category, createCategoryDto);
+    return this.categoryRepository.save(category);
   }
 
   findAll() {
@@ -22,27 +22,26 @@ export class CategoryService {
   }
 
   async findOne(id: number) {
-    const category=await this.categoryRepository.findOne({
-      where:{
+    const category = await this.categoryRepository.findOne({
+      where: {
         id,
-        
-      }
+      },
     });
     if (!category) {
-      throw new NotFoundException("Category Not found")
-    } 
-    return category
+      throw new NotFoundException('Category Not found');
+    }
+    return category;
   }
 
   async update(id: number, updateCategoryDto: UpdateCategoryDto) {
-    const category=await this.findOne(id)
-    Object.assign(category,updateCategoryDto)
+    const category = await this.findOne(id);
+    Object.assign(category, updateCategoryDto);
     return this.categoryRepository.save(category);
   }
 
   async remove(id: number) {
-    const category=await this.findOne(id);
-    category.isActive=false;
-    return this.categoryRepository.save(category)
+    const category = await this.findOne(id);
+    category.isActive = false;
+    return this.categoryRepository.save(category);
   }
 }

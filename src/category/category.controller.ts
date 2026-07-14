@@ -1,4 +1,14 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, ParseIntPipe } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  UseGuards,
+  ParseIntPipe,
+} from '@nestjs/common';
 import { CategoryService } from './category.service';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
@@ -19,27 +29,30 @@ export class CategoryController {
 
   @Get()
   async findAll() {
-    const categories=await this.categoryService.findAll();
-    if (categories.length==0) {
+    const categories = await this.categoryService.findAll();
+    if (categories.length == 0) {
       return {
-        "message":"No Categories found"
-      }
+        message: 'No Categories found',
+      };
     }
     return categories;
   }
 
   @Get(':id')
-  findOne(@Param('id',ParseIntPipe) id: number) {
+  findOne(@Param('id', ParseIntPipe) id: number) {
     return this.categoryService.findOne(id);
   }
 
   @Patch(':id')
-  update(@Param('id',ParseIntPipe) id: number, @Body() updateCategoryDto: UpdateCategoryDto) {
+  update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() updateCategoryDto: UpdateCategoryDto,
+  ) {
     return this.categoryService.update(id, updateCategoryDto);
   }
 
   @Delete(':id')
-  remove(@Param('id',ParseIntPipe) id: number) {
+  remove(@Param('id', ParseIntPipe) id: number) {
     return this.categoryService.remove(id);
   }
 }

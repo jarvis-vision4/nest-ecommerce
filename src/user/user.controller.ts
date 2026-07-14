@@ -1,4 +1,15 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Req, ParseIntPipe } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  UseGuards,
+  Req,
+  ParseIntPipe,
+} from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -13,30 +24,27 @@ import { UserPayload } from 'src';
 @Controller('api/v1/users')
 @TransformDto(ResponseUserDto)
 export class UserController {
-  constructor(private readonly userService: UserService) { }
+  constructor(private readonly userService: UserService) {}
 
   @Post()
   create(@Body() createUserDto: SignUpAuthDto) {
     return this.userService.create(createUserDto);
   }
 
-  @Get("/me")
+  @Get('/me')
   @UseGuards(AuthGuard)
-  getCurrentUser(
-    @CurrentUser() user: UserPayload
-  ) {
+  getCurrentUser(@CurrentUser() user: UserPayload) {
     return this.userService.findMe(user);
   }
-  @Get(":id")
+  @Get(':id')
   findOne(@Param('id', ParseIntPipe) id: number) {
-    return this.userService.findOne(id)
+    return this.userService.findOne(id);
   }
 
   @Get()
   findAll() {
     return this.userService.findAll();
   }
-
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {

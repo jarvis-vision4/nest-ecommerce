@@ -8,47 +8,48 @@ import { ProductService } from 'src/product/product.service';
 
 @Injectable()
 export class VariantsService {
-
   constructor(
     @InjectRepository(Variant)
     private variantRepository: Repository<Variant>,
-    private productService: ProductService
-  ) {
-
-  }
+    private productService: ProductService,
+  ) {}
   async findVariant(id: number) {
     const variant = await this.variantRepository.findOne({
       where: {
-        id
-      }
-    })
+        id,
+      },
+    });
     if (!variant) {
-      throw new NotFoundException("Variant Not Found")
+      throw new NotFoundException('Variant Not Found');
     }
-    return variant
+    return variant;
   }
   async create(createVariantDto: CreateVariantDto) {
-    const product = await this.productService.findOne(createVariantDto.productId)
+    const product = await this.productService.findOne(
+      createVariantDto.productId,
+    );
 
-    const variant = new Variant()
-    variant.product = product
-    Object.assign(variant, { ...createVariantDto, name: createVariantDto.name.toLowerCase() })
-    return this.variantRepository.save(variant)
+    const variant = new Variant();
+    variant.product = product;
+    Object.assign(variant, {
+      ...createVariantDto,
+      name: createVariantDto.name.toLowerCase(),
+    });
+    return this.variantRepository.save(variant);
   }
 
-
   async findVariantsWithProductId(id: number) {
-    const product = await this.productService.findOne(id)
+    const product = await this.productService.findOne(id);
     const variants = await this.variantRepository.find({
       where: {
-        product
+        product,
       },
       relations: {
-        items: true
-      }
-    })
+        items: true,
+      },
+    });
     if (variants.length == 0) {
-      throw new NotFoundException("Variants Not found")
+      throw new NotFoundException('Variants Not found');
     }
     return variants;
   }
@@ -58,7 +59,7 @@ export class VariantsService {
   }
 
   async remove(id: number) {
-    const variant = await this.findVariant(id)
-    this.variantRepository.remove(variant)
+    const variant = await this.findVariant(id);
+    this.variantRepository.remove(variant);
   }
 }

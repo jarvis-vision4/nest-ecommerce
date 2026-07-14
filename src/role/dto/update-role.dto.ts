@@ -1,7 +1,7 @@
 import { IsNotEmpty, Length } from 'class-validator';
 
 export class UpdateRoleDto {
-    @IsNotEmpty()
-    @Length(4)
-    description:string;
+  @IsNotEmpty()
+  @Length(4)
+  description: string;
 }

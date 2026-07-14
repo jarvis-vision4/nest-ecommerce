@@ -1,12 +1,16 @@
-import { IsJSON, IsNotEmpty, IsNumber, IsOptional } from "class-validator";
+import { IsArray, IsNotEmpty, IsNumber } from 'class-validator';
 
 export class AddToCartDTO {
-    @IsNumber()
-    @IsNotEmpty()
-    quantity!: number;
-    variantItemIds!: [number];
-    @IsNumber()
-    @IsNotEmpty()
-    productId!: number;
+  @IsNumber()
+  @IsNotEmpty()
+  quantity!: number;
 
+  @IsArray()
+  @IsNumber({}, { each: true })
+  @IsNotEmpty()
+  variantItemIds!: number[];
+
+  @IsNumber()
+  @IsNotEmpty()
+  productId!: number;
 }

@@ -1,22 +1,26 @@
-import { Variant } from "src/variants/entities/variant.entity";
-import { Column, DeleteDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Variant } from 'src/variants/entities/variant.entity';
+import {
+  Column,
+  DeleteDateColumn,
+  Entity,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity()
 export class VariantItem {
+  @PrimaryGeneratedColumn()
+  id!: number;
 
-    @PrimaryGeneratedColumn()
-    id!: number;
+  @Column({ type: 'varchar', length: 20 })
+  value!: string;
 
-    @Column({ type: 'varchar', length: 20 })
-    value!: string;
+  @Column({ type: 'decimal', precision: 4, scale: 2, default: 0 })
+  price!: number;
 
-    @Column({ type: 'decimal', precision: 4, scale: 2, default: 0 })
-    price!: number;
+  @ManyToOne(() => Variant, (v) => v.items, { onDelete: 'CASCADE' })
+  variant!: Variant;
 
-    @ManyToOne(() => Variant, (v) => v.items, { onDelete: 'CASCADE' })
-    variant!: Variant;
-
-    @DeleteDateColumn()
-    deletedDate!: Date;
-
+  @DeleteDateColumn()
+  deletedDate!: Date;
 }
