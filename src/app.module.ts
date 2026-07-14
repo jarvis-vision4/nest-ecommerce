@@ -27,6 +27,8 @@ import { VariantItem } from './variant-items/entities/variant-item.entity';
 import { CartModule } from './cart/cart.module';
 import { Cart } from './cart/entities/cart.entity';
 import { CartItem } from './cart/entities/cart-item.entity';
+import { ShippingAddressModule } from './shipping-address/shipping-address.module';
+import { ShippingAddress } from './shipping-address/entities/shipping-address.entity';
 
 @Module({
   imports: [
@@ -59,6 +61,7 @@ import { CartItem } from './cart/entities/cart-item.entity';
           VariantItem,
           Cart,
           CartItem,
+          ShippingAddress
         ],
         synchronize: true,
       }),
@@ -84,8 +87,10 @@ import { CartItem } from './cart/entities/cart-item.entity';
     VariantItemsModule,
 
     CartModule,
+
+    ShippingAddressModule,
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }

@@ -1,4 +1,5 @@
 import { Role } from 'src/role/entities/role.entity';
+import { ShippingAddress } from 'src/shipping-address/entities/shipping-address.entity';
 import {
   Entity,
   Column,
@@ -28,4 +29,7 @@ export class User {
 
   @ManyToOne(() => Role, (role) => role.users)
   role!: Role;
+
+  @OneToMany(() => ShippingAddress, (s) => s.user)
+  shippingAddresses!: ShippingAddress[]
 }
