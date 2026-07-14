@@ -1,20 +1,26 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
 import { ShippingAddressService } from './shipping-address.service';
 import { CreateShippingAddressDto } from './dto/create-shipping-address.dto';
 import { UpdateShippingAddressDto } from './dto/update-shipping-address.dto';
+import { AuthGuard } from 'src/cores/guards/auth.guard';
+import { CurrentUser } from 'src/cores/decorators/current-user.decorator';
+import { TransformDto } from 'src/cores/interceptors/transform-dto.interceptor';
+import { ResponseShippingAddressDto } from './dto/response-shipping-address.dto';
 
-@Controller('shipping-address')
+@Controller('api/v1/shipping-address')
+@UseGuards(AuthGuard)
+@TransformDto(ResponseShippingAddressDto)
 export class ShippingAddressController {
-  constructor(private readonly shippingAddressService: ShippingAddressService) {}
+  constructor(private readonly shippingAddressService: ShippingAddressService) { }
 
-  @Post()
-  create(@Body() createShippingAddressDto: CreateShippingAddressDto) {
-    return this.shippingAddressService.create(createShippingAddressDto);
+  @Post('add')
+  create(@Body() createShippingAddressDto: CreateShippingAddressDto, @CurrentUser() user) {
+    return this.shippingAddressService.create(createShippingAddressDto, user);
   }
 
-  @Get()
-  findAll() {
-    return this.shippingAddressService.findAll();
+  @Get('all')
+  findAll(@CurrentUser() user) {
+    return this.shippingAddressService.findAll(user);
   }
 
   @Get(':id')

@@ -1,3 +1,4 @@
+import { UserPayload } from 'src';
 import { Role } from 'src/role/entities/role.entity';
 import { ShippingAddress } from 'src/shipping-address/entities/shipping-address.entity';
 import {

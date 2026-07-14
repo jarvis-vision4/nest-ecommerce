@@ -17,7 +17,7 @@ import { UpdateCartDTO } from './dto/update-cart.dto';
 
 @Controller('api/v1/cart')
 export class CartController {
-  constructor(private readonly cartService: CartService) {}
+  constructor(private readonly cartService: CartService) { }
 
   @Get()
   @UseGuards(AuthGuard)
