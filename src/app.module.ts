@@ -29,6 +29,9 @@ import { Cart } from './cart/entities/cart.entity';
 import { CartItem } from './cart/entities/cart-item.entity';
 import { ShippingAddressModule } from './shipping-address/shipping-address.module';
 import { ShippingAddress } from './shipping-address/entities/shipping-address.entity';
+import { ShippingRuleModule } from './shipping-rule/shipping-rule.module';
+import { ShippingRule } from './shipping-rule/entities/shipping-rule.entity';
+
 
 @Module({
   imports: [
@@ -61,7 +64,8 @@ import { ShippingAddress } from './shipping-address/entities/shipping-address.en
           VariantItem,
           Cart,
           CartItem,
-          ShippingAddress
+          ShippingAddress,
+          ShippingRule
         ],
         synchronize: true,
       }),
@@ -89,6 +93,8 @@ import { ShippingAddress } from './shipping-address/entities/shipping-address.en
     CartModule,
 
     ShippingAddressModule,
+
+    ShippingRuleModule,
   ],
   controllers: [AppController],
   providers: [AppService],
