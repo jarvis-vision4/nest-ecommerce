@@ -1,4 +1,5 @@
 import { UserPayload } from 'src';
+import { Review } from 'src/review/entities/review.entity';
 import { Role } from 'src/role/entities/role.entity';
 import { ShippingAddress } from 'src/shipping-address/entities/shipping-address.entity';
 import {
@@ -33,4 +34,7 @@ export class User {
 
   @OneToMany(() => ShippingAddress, (s) => s.user)
   shippingAddresses!: ShippingAddress[]
+
+  @OneToMany(() => Review, (r) => r.user)
+  reviews!: Review[]
 }

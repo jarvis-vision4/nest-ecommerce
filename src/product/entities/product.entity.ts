@@ -2,6 +2,7 @@ import slugify from 'slugify';
 import { CartItem } from 'src/cart/entities/cart-item.entity';
 import { Category } from 'src/category/entities/category.entity';
 import { ProductGallery } from 'src/product-galleries/entities/product-gallery.entity';
+import { Review } from 'src/review/entities/review.entity';
 import { Variant } from 'src/variants/entities/variant.entity';
 import {
   AfterUpdate,
@@ -40,6 +41,8 @@ export class Product {
   productGalleries!: ProductGallery[];
   @OneToMany(() => Variant, (v) => v.product)
   variants!: Variant[];
+  @OneToMany(()=>Review,(r)=>r.product)
+  reviews!:Review[]
   @Column({ type: 'text' })
   slug!: string;
   @BeforeInsert()

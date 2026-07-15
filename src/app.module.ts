@@ -33,6 +33,8 @@ import { ShippingRuleModule } from './shipping-rule/shipping-rule.module';
 import { ShippingRule } from './shipping-rule/entities/shipping-rule.entity';
 import { OrderModule } from './order/order.module';
 import { Order } from './order/entities/order.entity';
+import { ReviewModule } from './review/review.module';
+import { Review } from './review/entities/review.entity';
 
 
 @Module({
@@ -68,7 +70,8 @@ import { Order } from './order/entities/order.entity';
           CartItem,
           ShippingAddress,
           ShippingRule,
-          Order
+          Order,
+          Review
         ],
         synchronize: true,
       }),
@@ -100,6 +103,8 @@ import { Order } from './order/entities/order.entity';
     ShippingRuleModule,
 
     OrderModule,
+
+    ReviewModule,
   ],
   controllers: [AppController],
   providers: [AppService],
