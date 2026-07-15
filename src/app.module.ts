@@ -31,6 +31,8 @@ import { ShippingAddressModule } from './shipping-address/shipping-address.modul
 import { ShippingAddress } from './shipping-address/entities/shipping-address.entity';
 import { ShippingRuleModule } from './shipping-rule/shipping-rule.module';
 import { ShippingRule } from './shipping-rule/entities/shipping-rule.entity';
+import { OrderModule } from './order/order.module';
+import { Order } from './order/entities/order.entity';
 
 
 @Module({
@@ -65,7 +67,8 @@ import { ShippingRule } from './shipping-rule/entities/shipping-rule.entity';
           Cart,
           CartItem,
           ShippingAddress,
-          ShippingRule
+          ShippingRule,
+          Order
         ],
         synchronize: true,
       }),
@@ -95,6 +98,8 @@ import { ShippingRule } from './shipping-rule/entities/shipping-rule.entity';
     ShippingAddressModule,
 
     ShippingRuleModule,
+
+    OrderModule,
   ],
   controllers: [AppController],
   providers: [AppService],
