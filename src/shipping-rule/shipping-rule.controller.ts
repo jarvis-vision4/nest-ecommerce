@@ -1,11 +1,14 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from '@nestjs/common';
 import { ShippingRuleService } from './shipping-rule.service';
 import { CreateShippingRuleDto } from './dto/create-shipping-rule.dto';
 import { UpdateShippingRuleDto } from './dto/update-shipping-rule.dto';
+import { TransformDto } from 'src/cores/interceptors/transform-dto.interceptor';
+import { ResponseShippingRuleDto } from './dto/response-shipping-rule.dto';
 
-@Controller('shipping-rule')
+@Controller('api/v1/shipping-rules')
+@TransformDto(ResponseShippingRuleDto)
 export class ShippingRuleController {
-  constructor(private readonly shippingRuleService: ShippingRuleService) {}
+  constructor(private readonly shippingRuleService: ShippingRuleService) { }
 
   @Post()
   create(@Body() createShippingRuleDto: CreateShippingRuleDto) {
@@ -18,8 +21,8 @@ export class ShippingRuleController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.shippingRuleService.findOne(+id);
+  findOne(@Param('id',ParseIntPipe) id: number) {
+    return this.shippingRuleService.findOne(id);
   }
 
   @Patch(':id')
